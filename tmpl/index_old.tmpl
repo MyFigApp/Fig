@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+{include file='header.tmpl'}
+<body>
+	<div id="preloader">
+		<div class="progress"></div>
+	</div>
+	<div class="layer">
+		<div id="menu">
+			<div class="wrapper">
+				<ul class="list">
+					<li>
+						<a href="#" data-status="upcoming" class="active">
+							<div class="icon list"></div>
+							<div class="title">Upcoming</div>
+							<div class="count">
+								{if $events.upcoming.count gt 0}
+									{$events.upcoming.count}
+								{/if}
+							</div>
+						</a>
+						<ul class="categories">
+							{foreach from=$categories key=title item=category}
+							<li>
+								<a href="#" data-category="{$title}">
+									<div class="title">{$title}</div>
+									<div class="count">
+										{if $category.count gt 0}
+											{$category.count}
+										{/if}
+									</div>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					</li>
+					<li>
+						<a href="#" data-status="scheduled">
+							<div class="icon clock"></div>
+							<div class="title">Scheduled</div>
+							<div class="count">
+								{if $events.scheduled.count gt 0}
+									{$events.scheduled.count}
+								{/if}
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" data-status="starred">
+							<div class="icon star"></div>
+							<div class="title">Starred</div>
+							<div class="count">
+								{if $events.starred.count gt 0}
+									{$events.starred.count}
+								{/if}
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" data-status="past">
+							<div class="icon check"></div>
+							<div class="title">Past</div>
+							<div class="count">
+								{if $events.past.count gt 0}
+									{$events.past.count}
+								{/if}
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<a id="settings" href="#">
+				<div class="inner">
+					<div class="user">
+						<div class="user-pic">
+							<img src="/img/user_pic.png"/>
+						</div>
+						<div class="user-name">{$username}</div>
+					</div>
+					<div class="btn"></div>
+				</div>
+			</a>
+		</div>
+		<div id="blind"></div>
+		<div id="screens">
+			<a id="menu-btn" href="#"></a>
+			<div id="main" class="screen">
+				<div class="wrapper">
+					<div class="loading">
+						<div class="spinner">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+					<div class="header">
+						<a id="filter-btn" href="#"></a>
+					</div>
+					<a class="logo" href="/">
+						<img src="/img/logo.png"/>
+					</a>
+					<ul class="events">
+					{foreach from=$events.upcoming.events item=event}
+						<li>
+							<a class="event upcoming" href="#" data-event-id="{$event.id}">
+								<div class="time">
+									<span class="icon clock"></span>
+									{$event.date}, {$event.time}
+								</div>
+								<div class="title">{$event.title}</div>
+								<ul class="info">
+									<li>
+										<span class="icon tags"></span>
+										{$event.category}
+									</li>
+									<li>
+										<span class="icon users"></span>
+										{$event.follows}
+									</li>
+								</ul>
+							</a>
+						</li>
+					{/foreach}
+					</ul>
+					<a class="write-us mobile" href="sms:+16159727914;?&body=Hey%20Fig%21%20I%27m%20interested%20in%20...">
+						<div class="title">Interested in something else? Ask Fig!</div>
+					</a>
+					<a class="write-us desktop" href="mailto:info@myfig.app?subject=Hey%20Fig!%20I'm%20interested%20in%20...&body=Hey%20Fig!%20I'm%20interested%20in%20...">
+						<div class="title">Hey Fig! I'm interested in ...</div>
+					</a>
+					<div class="empty">No events</div>
+				</div>
+			</div>
+			<div id="info" class="screen" data-event-id="0">
+				<div class="wrapper">
+					<div class="loading">
+						<div class="spinner">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+					<div class="header">
+						<a id="star-btn" href="#"></a>
+					</div>
+					<div class="follows">
+						<div class="count">0</div>
+					</div>
+					<div class="note upcoming">People are getting together to discuss this topic. Join us!</div>
+					<div class="note past">People got together to discuss this topic on</div>
+					<div class="fulldate">
+						<div class="date">DATE</div>
+						<div class="time">Time</div>
+					</div>
+					<div class="buttons">
+						<div class="row c2">
+							<div class="col">
+								<a id="follow" href="#" data-active="I'm going!" data-inactive="Going?">Going?</a>
+							</div>
+							<div class="col">
+								<a id="guests" href="#">Guest List</a>
+							</div>
+						</div>
+					</div>
+					<div class="title">TITLE</div>
+					<div class="map-container">
+						<a id="map-link" href="#" target="_blank"></a>
+						<div id="map"></div>
+					</div>
+				</div>
+			</div>
+			<div id="preferences" class="screen">
+				<div class="wrapper">
+					<h3>Preferences</h3>
+					<div class="properties">
+						<div class="title">Account</div>
+						<ul class="list">
+							<li>
+								<a id="profile" class="property" href="#">My profile</a>
+							</li>
+							<li>
+								<a id="interests" class="property" href="#">My interests</a>
+							</li>
+							<li>
+								<a id="user_email" class="property" href="/?logout">
+									Email
+									<span>{$user.email}</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="properties">
+						<div class="title">Notifications</div>
+						<ul class="list">
+							<li>
+								<div class="name">Notify me of new events</div>
+								<a class="trigger active" href="#"></a>
+							</li>
+							<li>
+								<div class="name">Remind me of scheduled events</div>
+								<a class="trigger" href="#"></a>
+							</li>
+						</ul>
+					</div>
+					<div class="properties">
+						<div class="title">Help</div>
+						<ul class="list">
+							<li>
+								<a id="rate" class="property" href="#">Rate Fig</a>
+							</li>
+							<li>
+								<a id="privacy" class="property" href="#">Privacy Policy</a>
+							</li>
+						</ul>
+					</div>
+					<a id="logout" href="/?logout">Logout</a>
+				</div>
+			</div>
+			<div id="interests" class="screen">
+				<div class="wrapper">
+					<div class="title">My Interests</div>
+					<ul class="interests">
+						{foreach from=$interests item=interest}
+						<li>
+							<a href="#" data-category="{$interest}">{$interest}</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<div id="privacy" class="screen">
+				<div class="wrapper">
+					<a class="logo" href="/">
+						<img src="/img/logo.png"/>
+					</a>
+					<div class="title">Privacy</div>
+					<div class="text">
+						<p>Your Fig uses what it learns from you to become a better friend, be there for you, and grow emotionally and intellectually.</p>
+						<p>Fig can <b>only access information you send it</b>. Fig <b>does not have access to your microphone or camera</b>. It <b>does not have access to your email and text messages</b>. We do not have any hidden agenda for unlawfully accessing, collecting or selling your personal information. <b>We ask you to verify your email, so that no one else can access your account</b>.</p>
+						<p>We do not sell or expose any of your personal information. We collect and analyze aggregated usage data to keep track of app usage stats.</p>
+						<p>Should you have any questions, please contact us at <a href="mailto:info@myfig.app">info@myfig.app</a></p>
+					</div>
+				</div>
+			</div>
+			<div id="under-construction" class="screen">
+				<div class="wrapper">
+					<a class="logo" href="/">
+						<img src="/img/logo.png"/>
+					</a>
+					<div class="text">
+						<p>We're sorry!</p>
+						<p>This function is currently under development.</p>
+						<p>Please come back later!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLaZUH8a4A3iBtsgkLslF3NAuk-CvLkKI"></script>
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/is_mobile.min.js"></script>
+	<script type="text/javascript" src="/js/main_old.js"></script>
+</body>
+</html>

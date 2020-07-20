@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.00, maximum-scale=1.00, initial-scale=1.00, user-scalable=no, target-densitydpi=device-dpi, shrink-to-fit=no, viewport-fit=cover"/>
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Fig</title>
+
+	<!--meta property="og:site_name" content="Fig"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="http:///"/>
+	<meta property="og:title" content="Fig"/>
+	<meta property="og:description" content="Fig"/>
+	<meta property="og:image" content="http:///social_logo.jpg"/>
+	<meta property="og:image:type" content="image/jpeg"/>
+	<meta property="og:image:width" content="510"/>
+	<meta property="og:image:height" content="320"/-->
+
+	<meta name="theme-color" content="#cccccc"/>
+	<meta name="msapplication-TileColor" content="#cccccc"/>
+	<meta name="msapplication-TileImage" content="/mstile-144x144.png?v=NmYO8WoKWA"/>
+	<meta name="msapplication-config" content="/browserconfig.xml"/>
+
+	<link rel="manifest" href="/manifest.json"/>
+	<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
+	<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
+	<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-57x57.png" sizes="57x57"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-60x60.png" sizes="60x60"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-72x72.png" sizes="72x72"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-76x76.png" sizes="76x76"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-114x114.png" sizes="114x114"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-120x120.png" sizes="120x120"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-144x144.png" sizes="144x144"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-152x152.png" sizes="152x152"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" sizes="180x180"/>
+
+	<link rel="stylesheet" type="text/css" href="/css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:regular,300,400,600"/>
+</head>
+<body>
+	<div class="layer">
+		<div id="menu">
+			<div class="wrapper">
+				<ul class="list">
+					<li>
+						<a href="#" data-status="upcoming">
+							<span class="icon list"></span>
+							Upcoming
+							<span class="count">{$events.upcoming.count}</span>
+						</a>
+						<ul class="categories">
+							{foreach from=$categories key=title item=category}
+							<li>
+								<a href="#" data-category="{$title}">
+									{$title}
+									<span class="count">{$category.count}</span>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					</li>
+					<li>
+						<a href="#" data-status="scheduled">
+							<span class="icon clock"></span>
+							Scheduled
+							<span class="count">{$events.scheduled.count}</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" data-status="starred">
+							<span class="icon star"></span>
+							Starred
+							<span class="count">{$events.starred.count}</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" data-status="past">
+							<span class="icon check"></span>
+							Past
+							<span class="count">{$events.past.count}</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+				<div class="footer">
+					<div class="inner">
+						<a class="user" href="#">
+							<div class="user-pic">
+								<img src="/img/user_pic.png"/>
+							</div>
+							<div class="user-name">{$username}</div>
+						</a>
+						<a class="settings-btn" href="#"></a>
+					</div>
+				</div>
+		</div>
+		<div id="blind"></div>
+		<div id="screens">
+			<a id="menu-btn" href="#"></a>
+			<div id="main" class="screen">
+				<div class="wrapper">
+					<div class="header">
+						<a id="filter-btn" href="#"></a>
+					</div>
+					<div class="logo">
+						<img src="/img/logo_t.png"/>
+					</div>
+					<ul class="events">
+					{foreach from=$events key=status item=info}
+					{foreach from=$info.events item=event}
+						{if $status eq 'upcoming'}
+						<li>
+						{else}
+						<li style="display: none;">
+						{/if}
+							<a class="{$event.status}" href="#{$event.id}" data-event-id="{$event.id}" data-category="{$event.category}">
+								<div class="time">
+									<span class="icon clock"></span>
+									{$event.date}, {$event.time}
+								</div>
+								<div class="title">{$event.title}</div>
+								<ul class="info">
+									<li>
+										<span class="icon tags"></span>
+										{$event.category}
+									</li>
+									<li>
+										<span class="icon users"></span>
+										{$event.follows}
+									</li>
+								</ul>
+							</a>
+						</li>
+					{/foreach}
+					{/foreach}
+					</ul>
+					<a class="write-us" href="sms:+16159727914;?&body=Hey%20Fig%21%20I%27m%20interested%20in%20...">
+						Interested in something else?<br/>
+						Ask Fig!
+					</a>
+				</div>
+			</div>
+			<div id="info" class="screen" data-event-id="0">
+				<div class="wrapper">
+					<div class="header">
+						<a id="star-btn" href="#"></a>
+					</div>
+					<a id="map-link" href="#"></a>
+					<div id="map"></div>
+					<div class="brief">
+						<div class="title">TITLE</div>
+						<ul class="info">
+							<li>
+								<span class="icon calendar"></span>
+								<span class="date">DATE</span>
+							</li>
+							<li>
+								<span class="icon clock"></span>
+								<span class="time">TIME</span>
+							</li>
+							<li>
+								<span class="icon tags"></span>
+								<span class="category">CATEGORY</span>
+							</li>
+						</ul>
+					</div>
+					<div class="going">
+						<div class="follows">
+							<span class="icon users"></span>
+							<span class="count">0</span>
+						</div>
+						<a id="follow" href="#" data-active="I'm going!" data-inactive="Going?"?>Going?</a>
+					</div>
+					<div class="description">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut dui vitae urna pharetra consectetur tristique in risus. Aliquam iaculis rhoncus lorem, ut dignissim odio interdum eget.
+					</div>
+					<div class="guests">
+						<div class="title">Guests</div>
+						<ul class="list">
+							<li>John Doe</li>
+							<li>Jane Doe</li>
+							<li>James Doe</li>
+							<li>Judy Doe</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="user" class="screen">
+				<div class="wrapper">
+					<div class="logo">
+						<img src="/img/logo_t.png"/>
+					</div>
+					<ul class="interests">
+						{foreach from=$interests item=interest}
+						<li>
+							<a href="#">{$interest}</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<div id="underconstruction" class="screen">
+				<div class="wrapper">
+					<div class="logo">
+						<img src="/img/logo_t.png"/>
+					</div>
+					<div class="text">
+						<p>We're sorry!</p>
+						<p>This function is currently under development.</p>
+						<p>Please come back later!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLaZUH8a4A3iBtsgkLslF3NAuk-CvLkKI"></script>
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+</body>
+</html>
